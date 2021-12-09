@@ -1,7 +1,7 @@
 .row{
   display: flex;
-    justify-content: center;
-    padding-top: 2%;
+  justify-content: center;
+  padding-top: 2%;
 }
 
 .content-row{
@@ -10,6 +10,12 @@
 
 .col{
   width: 100%;
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
+}
+
+.chart-row{
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

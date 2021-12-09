@@ -3,6 +3,9 @@ import { Row, Col, Divider } from 'antd';
 import 'antd/dist/antd.css';
 import './index.css';
 import Dictaphone from '../Dictaphone';
+import DataGrid from '../DataGrid';
+import PieChart from '../Pie';
+import DoughnutChart from '../Doughnut';
 
 const Container = () => {
   return (
@@ -12,10 +15,15 @@ const Container = () => {
           <Dictaphone />
         </Col>
       </Row>
-      <Divider />
+      <Divider style={{ margin: 0 }} />
       <Row className="content-row">
-        <Col span={16}>Main</Col>
-        <Col span={8}>Sider</Col>
+        <Col span={16}>
+          <DataGrid />
+        </Col>
+        <Col span={8}>
+          <Row className="chart-row"><PieChart /></Row>
+          <Row className="chart-row"><DoughnutChart /></Row>
+        </Col>
       </Row>
     </>
   );

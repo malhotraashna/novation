@@ -8,10 +8,13 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.17.2",
+    "chart.js": "^3.6.2",
     "react": "^17.0.2",
+    "react-chartjs-2": "^4.0.0",
     "react-dom": "^17.0.2",
     "react-scripts": "^4.0.3",
     "react-speech-recognition": "^3.9.0",
+    "reqwest": "^2.0.5",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
