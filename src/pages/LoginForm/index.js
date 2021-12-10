@@ -91,46 +91,52 @@ const LoginForm = ({ setToken }) => {
     </Row> : ''
 
     return (
-        <Form
-            {...layout}
-            onSubmit={handleSubmit}
-            style={{ paddingTop: '50px' }}
-        >
+        <>
+            <Row justify='center'>
+                <Col span={18}>
+                    <Form
+                        {...layout}
+                        onSubmit={handleSubmit}
+                        style={{ padding: '50px', backgroundColor: '#fff' }}
+                    >
 
-            <Row>
-                <Col span="8"></Col>
-                <Col span="8"><p>Please Login with your Model N Co-Pilot Account</p></Col>
+
+
+                        <p style={{ textAlign: 'center' }}>Please Login with your Model N Co-Pilot Account</p>
+
+
+                        <Form.Item
+                            label="Username"
+                            name="username"
+                            value={username}
+                            onChange={handleUsernameChange}
+                            rules={[{ required: true, message: 'Please input your username!' }]}
+                        >
+                            <Input />
+                        </Form.Item>
+
+                        <Form.Item
+                            label="Password"
+                            name="password"
+                            value={password}
+                            onChange={handlePasswordChange}
+                            rules={[{ required: true, message: 'Please input your password!' }]}
+                        >
+                            <Input.Password />
+                        </Form.Item>
+
+                        <Form.Item {...tailLayout}>
+                            <Button type="primary" htmlType="submit" onClick={handleSubmit}>
+                                Login
+                            </Button>
+                        </Form.Item>
+
+                        {errorAlert}
+
+                    </Form>
+                </Col>
             </Row>
-
-            <Form.Item
-                label="Username"
-                name="username"
-                value={username}
-                onChange={handleUsernameChange}
-                rules={[{ required: true, message: 'Please input your username!' }]}
-            >
-                <Input />
-            </Form.Item>
-
-            <Form.Item
-                label="Password"
-                name="password"
-                value={password}
-                onChange={handlePasswordChange}
-                rules={[{ required: true, message: 'Please input your password!' }]}
-            >
-                <Input.Password />
-            </Form.Item>
-
-            <Form.Item {...tailLayout}>
-                <Button type="primary" htmlType="submit" onClick={handleSubmit}>
-                    Login
-                </Button>
-            </Form.Item>
-
-            {errorAlert}
-
-        </Form>
+        </>
     );
 };
 export default LoginForm;

@@ -8,32 +8,34 @@ import LoginForm from './pages/LoginForm';
 
 const { Header, Footer, Content } = Layout;
 
-function MainContent(){
-  const {token, setToken} = useAuthToken();
+function MainContent() {
+  const { token, setToken } = useAuthToken();
 
-  if(!token){
-    return <LoginForm  setToken={setToken} />
+  if (!token) {
+    return <div style={{paddingTop: 60}}><LoginForm setToken={setToken} /></div>
   }
 
-  return <BrowserRouter>
-  <Routes>
-    <Route path="/" element={ <Container />} />
-    <Route path="/dashboard" element={<Dashboard />} />
-  </Routes>
-</BrowserRouter>
+  return <div style={{backgroundColor: '#fff', padding: 30}}>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Container />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+    </Routes>
+  </BrowserRouter>
+  </div>
 }
 
 function App() {
   return (
     <div className="app">
       <Layout>
-        <Header className="header pilot-header">
-          Model N Co-Pilot
-        </Header>
-        <Content className="site-layout" style={{ padding: '60px 50px' }}>
-          <MainContent />
+        <Header>Model N Co-Pilot</Header>
+        <Content className="site-layout-content" style={{ padding: '60px 50px', paddingTop:0 }}>
+          <Layout style={{}}>
+            <MainContent />
+          </Layout>
         </Content>
-        <Footer></Footer>
+        <Footer style={{ textAlign: 'center' }}>Model N Co-Pilot &copy; 2021</Footer>
       </Layout>
     </div>
   );
