@@ -37,7 +37,7 @@ class DataGrid extends React.Component {
     return (
       <Table
         columns={columns}
-        rowKey={record => record.customer_oid + record.total_dollars}
+        rowKey={record => record.oid}
         dataSource={this.props.data}
         pagination={{ pageSize: 10, showSizeChanger: false }}
         scroll={{ y: 240 }}

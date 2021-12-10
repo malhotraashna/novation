@@ -1,0 +1,11 @@
+.container-div{
+  position: fixed;
+  left: 4%;
+  bottom: 0%;
+  top: 85%;
+}
+
+.ant-popover{
+  overflow: auto;
+  max-height: 25vw;
+}

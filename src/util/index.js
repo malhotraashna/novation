@@ -6,15 +6,21 @@ const getRecommendations = async (searchText) => {
     url: 'http://mnipdmveeravalli:3000/recommendations',
     headers: {},
     data: {
-      query: searchText
+      query: searchText,
+      user: 'demo',
     }
   });
   console.log('response:: ', res);
+  const trimmedSearchText = searchText.trim();
+  const newSearchText = trimmedSearchText.substring(0, trimmedSearchText.lastIndexOf(' '));
+  console.log('newSearchText:: ', newSearchText);
   const result = [];
-  // const node = res && res.data && res.data.node && res.data.node.word;
-  res && res.data && res.data.data && res.data.data.forEach(recommendation => {
-    result.push({ value: recommendation.word });
-  });
+  if (res && res.data) {
+    const node = res.data.node && res.data.node.word;
+    res.data.data && res.data.data.forEach(recommendation => {
+      result.push({ value: `${newSearchText} ${node} ${recommendation.word}`.trim() });
+    });
+  }
   return result;
 };
 
@@ -25,7 +31,8 @@ const getSearchData = async (searchText) => {
     url: 'http://mnipdmveeravalli:3000/',
     headers: {},
     data: {
-      query: searchText
+      query: searchText,
+      user: 'demo',
     }
   });
   console.log('response:: ', res);

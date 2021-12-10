@@ -4,8 +4,7 @@ import { Form, AutoComplete, Space } from 'antd';
 import { AudioOutlined, AudioMutedOutlined } from '@ant-design/icons';
 import { getRecommendations } from '../../util';
 
-const Dictaphone = ({ getSearchText }) => {
-  let timeoutId;
+const Dictaphone = ({ getSearchText, history, setHistory }) => {
   const [options, setOptions] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [charCounter, setCharCounter] = useState(1);
@@ -19,7 +18,7 @@ const Dictaphone = ({ getSearchText }) => {
   } = useSpeechRecognition();
 
   useEffect(() => {
-    updateSearchText();
+    setSearchText(transcript);
     // setSearchText()
   }, [listening]);
 
@@ -32,25 +31,6 @@ const Dictaphone = ({ getSearchText }) => {
     return <span>Browser doesn't support speech recognition.</span>;
   }
 
-  const updateSearchText = () => {
-    //timeoutId = setTimeout(() => {
-      // console.log('listening::', listening);
-      // console.log('searchText:: ', searchText);
-      // console.log('transcript:: ', finalTranscript);
-      console.log(searchText !== finalTranscript);
-      /* if (listening && searchText !== finalTranscript) {
-        setSearchText(transcript);
-      } */
-      setSearchText(transcript);
-      //updateSearchText();
-    //}, 100);
-  };
-  /*
-  const resetTimeout = () => {
-    clearTimeout(timeoutId);
-  };
-  */
-
   const onFinish = (values) => {
     console.log('Success:', values);
     setCharCounter(1);
@@ -62,22 +42,23 @@ const Dictaphone = ({ getSearchText }) => {
   };
 
   const onSearch = async (searchText) => {
-    console.log('searchText:: ', searchText);
-    console.log('charCounter:: ', charCounter);
-    let recommendations;
-    if (charCounter % 3 === 0) {
-      recommendations = await getRecommendations(searchText);
+    if (!searchText || searchText.length <= 3) {
+      console.log('>>>>');
+      setOptions([]);
+    }
+    if (charCounter % 3 === 0 && searchText.length) {
+      const recommendations = await getRecommendations(searchText);
       setOptions(
         !searchText ? [] : recommendations
       );
+      setCharCounter(1);
+    } else {
+      setCharCounter(charCounter + 1);
     }
-    console.log('recommendations:: ', recommendations);
-    setCharCounter(charCounter + 1);
   };
 
   const onSelect = (data) => {
-    console.log('onSelect', data);
-    setSearchText(`${searchText} ${data}`);
+    setSearchText(data);
     setCharCounter(3);
   };
 
@@ -91,7 +72,7 @@ const Dictaphone = ({ getSearchText }) => {
   const startListening = async () => {
     // resetTimeout();
     await SpeechRecognition.startListening();
-    updateSearchText();
+    // updateSearchText();
     // setSearchText(transcript);
   };
 
@@ -107,7 +88,7 @@ const Dictaphone = ({ getSearchText }) => {
           name="search"
           required="true"
           style={{ width: '100%' }}
-          rules={[{ required: true, message: 'Please input your search text!' }]}
+        // rules={[{ required: true, message: 'Please input your search text!' }]}
         >
           <Space>
             <AutoComplete
