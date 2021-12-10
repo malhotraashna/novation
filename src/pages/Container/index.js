@@ -5,9 +5,10 @@ import 'antd/dist/antd.css';
 import './index.css';
 import Dictaphone from '../Dictaphone';
 import DataGrid from '../DataGrid';
+import History from '../History';
 import PieChart from '../Pie';
 import DoughnutChart from '../Doughnut';
-import History from '../History';
+import ScatterChart from '../Scatter';
 import { getSearchData } from '../../util';
 
 const Container = () => {
@@ -39,8 +40,9 @@ const Container = () => {
             {!_.isEmpty(searchData) && searchData.data.length ? <DataGrid data={searchData.data} /> : <div style={{ textAlign: 'center' }}>No data</div>}
           </div>
         </Col>
-        {/* <PieChart />
-        <DoughnutChart /> */}
+        <PieChart />
+        <DoughnutChart />
+        <ScatterChart />
       </Row>
       <History data={history} />
     </>
