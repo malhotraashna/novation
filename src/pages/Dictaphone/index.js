@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import SpeechRecognition, { useSpeechRecognition, } from 'react-speech-recognition';
-import { Form, Button, AutoComplete, Space } from 'antd';
+import { Form, AutoComplete, Space } from 'antd';
 import { AudioOutlined, AudioMutedOutlined } from '@ant-design/icons';
+import { getRecommendations } from '../../util';
 
-const mockVal = (str, repeat = 1) => ({
-  value: str.repeat(repeat),
-});
-
-const Dictaphone = () => {
+const Dictaphone = ({ getSearchText }) => {
   let timeoutId;
   const [options, setOptions] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const [charCounter, setCharCounter] = useState(1);
 
   const {
     transcript,
@@ -55,20 +53,32 @@ const Dictaphone = () => {
 
   const onFinish = (values) => {
     console.log('Success:', values);
+    setCharCounter(1);
+    getSearchText(searchText);
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
 
-  const onSearch = (searchText) => {
-    setOptions(
-      !searchText ? [] : [mockVal(searchText), mockVal(searchText, 2), mockVal(searchText, 3)],
-    );
+  const onSearch = async (searchText) => {
+    console.log('searchText:: ', searchText);
+    console.log('charCounter:: ', charCounter);
+    let recommendations;
+    if (charCounter % 3 === 0) {
+      recommendations = await getRecommendations(searchText);
+      setOptions(
+        !searchText ? [] : recommendations
+      );
+    }
+    console.log('recommendations:: ', recommendations);
+    setCharCounter(charCounter + 1);
   };
 
   const onSelect = (data) => {
     console.log('onSelect', data);
+    setSearchText(`${searchText} ${data}`);
+    setCharCounter(3);
   };
 
   const onChange = (data) => {

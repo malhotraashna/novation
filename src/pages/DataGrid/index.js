@@ -1,36 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import { Table } from 'antd';
-import reqwest from 'reqwest';
-
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    sorter: true,
-    render: name => `${name.first} ${name.last}`,
-    width: '20%',
-  },
-  {
-    title: 'Gender',
-    dataIndex: 'gender',
-    filters: [
-      { text: 'Male', value: 'male' },
-      { text: 'Female', value: 'female' },
-    ],
-    width: '20%',
-  },
-  {
-    title: 'Email',
-    dataIndex: 'email',
-  },
-];
-
-const getRandomuserParams = params => ({
-  results: params.pagination.pageSize,
-  page: params.pagination.current,
-  ...params,
-});
+import constants from '../../util/constants';
 
 class DataGrid extends React.Component {
   state = {
@@ -43,52 +14,37 @@ class DataGrid extends React.Component {
   };
 
   componentDidMount() {
+    console.log('componentDidMount');
     const { pagination } = this.state;
-    this.fetch({ pagination });
   }
 
   handleTableChange = (pagination, filters, sorter) => {
-    this.fetch({
-      sortField: sorter.field,
-      sortOrder: sorter.order,
-      pagination,
-      ...filters,
-    });
-  };
 
-  fetch = (params = {}) => {
-    this.setState({ loading: true });
-    reqwest({
-      url: 'https://randomuser.me/api',
-      method: 'get',
-      type: 'json',
-      data: getRandomuserParams(params),
-    }).then(data => {
-      console.log(data);
-      this.setState({
-        loading: false,
-        data: data.results,
-        pagination: {
-          ...params.pagination,
-          total: 200,
-          // 200 is mock data, you should read it from server
-          // total: data.totalCount,
-        },
-      });
-    });
   };
 
   render() {
-    const { data, pagination, loading } = this.state;
+    console.log('props:: ', this.props);
+    const columns = [];
+    this.props.data && this.props.data.length && this.props.data[0] &&
+      Object.keys(this.props.data[0]).forEach((key, index) => {
+        columns.push({
+          title: constants[key],
+          dataIndex: key,
+          key: index,
+        });
+      });
+
     return (
       <Table
         columns={columns}
-        rowKey={record => record.login.uuid}
-        dataSource={data}
-        pagination={pagination}
-        loading={loading}
-        onChange={this.handleTableChange}
+        rowKey={record => record.customer_oid + record.total_dollars}
+        dataSource={this.props.data}
+        pagination={{ pageSize: 10, showSizeChanger: false }}
+        scroll={{ y: 240 }}
+      // loading={loading}
+      // onChange={this.handleTableChange}
       />
+      // <Table columns={columns} dataSource={data} pagination={{ pageSize: 50, showSizeChanger: false }} scroll={{ y: 240 }} />
     );
   }
 }
