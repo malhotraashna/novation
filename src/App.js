@@ -12,7 +12,7 @@ function MainContent() {
   const { token, setToken } = useAuthToken();
 
   if (!token) {
-    return <div style={{paddingTop: 60}}><LoginForm setToken={setToken} /></div>
+    return <div style={{}}><LoginForm setToken={setToken} /></div>
   }
 
   return <div style={{backgroundColor: '#fff', padding: 30}}>
@@ -31,7 +31,7 @@ function App() {
       <Layout>
         <Header>Model N Co-Pilot</Header>
         <Content className="site-layout-content" style={{ padding: '60px 50px', paddingTop:0 }}>
-          <Layout style={{}}>
+          <Layout style={{padding: 50, paddingTop: 100}}>
             <MainContent />
           </Layout>
         </Content>

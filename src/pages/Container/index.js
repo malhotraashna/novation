@@ -26,14 +26,14 @@ const Container = () => {
         </Col>
       </Row>
       <Divider style={{ margin: 0 }} />
-      <Row className="content-row">
-        <Col className="col">
-          {searchData.length ? <DataGrid data={searchData} /> : 'No Data'}
+      <Row justify='center'>
+        <Col span={24}>
+        <div>
+          {searchData.length ? <DataGrid data={searchData} /> : <div style={{textAlign: 'center'}}>No data</div>}
+        </div>
         </Col>
-        {/* <Col span={8}>
-          <Row className="chart-row"><PieChart /></Row>
-          <Row className="chart-row"><DoughnutChart /></Row>
-        </Col> */}
+        <PieChart />
+        <DoughnutChart />
       </Row>
     </>
   );

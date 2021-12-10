@@ -2,6 +2,9 @@ body{
   background-color: #f0f2f5 !important;
 }
 .ant-layout-header{
+  position: fixed;
+  width: 100%;
+  z-index: 1;
   background-color: darkcyan !important;
   color:white !important;
   font-weight: bold;
