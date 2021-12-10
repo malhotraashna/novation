@@ -35,6 +35,10 @@ const Dictaphone = ({ getSearchText, history, setHistory }) => {
     console.log('Success:', values);
     setCharCounter(1);
     getSearchText(searchText);
+    const updatedHistory = [...history, searchText];
+    const updatedHistoryString = JSON.stringify({ commands: updatedHistory });
+    sessionStorage.setItem('commandHistory', updatedHistoryString);
+    setHistory(updatedHistory);
   };
 
   const onFinishFailed = (errorInfo) => {

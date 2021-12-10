@@ -15,7 +15,8 @@ const Container = () => {
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
-    setHistory(sessionStorage.getItem('commandHistory'));
+    const commandHistory = JSON.parse(sessionStorage.getItem('commandHistory'));
+    setHistory((commandHistory && commandHistory.commands) || []);
   }, []);
 
   const getSearchText = async (searchText) => {

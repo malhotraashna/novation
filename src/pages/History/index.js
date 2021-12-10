@@ -4,25 +4,15 @@ import { QuestionCircleFilled } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import './index.css';
 
-const History = () => {
-  const content = (
-    <div>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-    </div>
-  );
+const History = ({ data }) => {
+  let content;
+  if (data && data.length) {
+    content = data.map(command => {
+      return <p>{command}</p>;
+    });
+  } else {
+    content = <p>No History</p>;
+  }
 
   return (
     <div className="container-div">
