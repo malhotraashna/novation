@@ -21,9 +21,9 @@ const Dictaphone = () => {
   } = useSpeechRecognition();
 
   useEffect(() => {
-    // updateSearchText();
+    updateSearchText();
     // setSearchText()
-  });
+  }, [listening]);
 
   const microphoneStyle = {
     fontSize: '20px',
@@ -35,21 +35,23 @@ const Dictaphone = () => {
   }
 
   const updateSearchText = () => {
-    timeoutId = setTimeout(() => {
+    //timeoutId = setTimeout(() => {
       // console.log('listening::', listening);
       // console.log('searchText:: ', searchText);
       // console.log('transcript:: ', finalTranscript);
-      // console.log(searchText !== finalTranscript);
-      if (listening && searchText !== finalTranscript) {
+      console.log(searchText !== finalTranscript);
+      /* if (listening && searchText !== finalTranscript) {
         setSearchText(transcript);
-      }
-      updateSearchText();
-    }, 100);
+      } */
+      setSearchText(transcript);
+      //updateSearchText();
+    //}, 100);
   };
-
+  /*
   const resetTimeout = () => {
     clearTimeout(timeoutId);
   };
+  */
 
   const onFinish = (values) => {
     console.log('Success:', values);
@@ -70,14 +72,14 @@ const Dictaphone = () => {
   };
 
   const onChange = (data) => {
-    resetTimeout();
+    // resetTimeout();
     resetTranscript();
     console.log('>>>>>>>', data, '?????', listening);
     setSearchText(data);
   };
 
   const startListening = async () => {
-    resetTimeout();
+    // resetTimeout();
     await SpeechRecognition.startListening();
     updateSearchText();
     // setSearchText(transcript);
