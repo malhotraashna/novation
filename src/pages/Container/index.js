@@ -34,12 +34,12 @@ const Container = () => {
       <Divider style={{ margin: 0 }} />
       <Row justify='center'>
         <Col span={24}>
-        <div>
-          {searchData.length ? <DataGrid data={searchData} /> : <div style={{textAlign: 'center'}}>No data</div>}
-        </div>
+          <div>
+            {!_.isEmpty(searchData) && searchData.data.length ? <DataGrid data={searchData.data} /> : <div style={{ textAlign: 'center' }}>No data</div>}
+          </div>
         </Col>
-        <PieChart />
-        <DoughnutChart />
+        {/* <PieChart />
+        <DoughnutChart /> */}
       </Row>
       <History data={history} />
     </>
