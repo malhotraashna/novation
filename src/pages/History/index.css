@@ -3,9 +3,19 @@
   left: 4%;
   bottom: 0%;
   top: 85%;
+  max-width: min-content;
 }
 
 .ant-popover{
   overflow: auto;
   max-height: 25vw;
+  max-width: min-content;
+}
+
+.history-link{
+  color:black;
+}
+
+.history-link :hover{
+  color: #1890ff;
 }

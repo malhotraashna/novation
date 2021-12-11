@@ -13,6 +13,7 @@ import BarChart from '../Bar';
 import { getSearchData } from '../../util';
 
 const Container = () => {
+  const [historyText, setHistoryText] = useState();
   const [searchData, setSearchData] = useState({});
   const [history, setHistory] = useState([]);
 
@@ -21,17 +22,22 @@ const Container = () => {
     setHistory((commandHistory && commandHistory.commands) || []);
   }, []);
 
-  const getSearchText = async (searchText) => {
+  const getSearchTextResult = async (searchText) => {
     const res = await getSearchData(searchText);
     console.log('data res:: ', res);
     setSearchData(res);
+  };
+
+  const rerunHistory = (searchText) => {
+    setHistoryText(searchText);
+    getSearchTextResult(searchText);
   };
 
   return (
     <>
       <Row className="row">
         <Col className="col">
-          <Dictaphone getSearchText={getSearchText} history={history} setHistory={setHistory} />
+          <Dictaphone historyText={historyText} getSearchText={getSearchTextResult} history={history} setHistory={setHistory} />
         </Col>
       </Row>
       <Divider style={{ margin: 0 }} />
@@ -46,7 +52,7 @@ const Container = () => {
         <ScatterChart />
         <BarChart />
       </Row>
-      <History data={history} />
+      <History data={history} rerunHistory={rerunHistory} />
     </>
   );
 };

@@ -4,7 +4,7 @@ import { Form, AutoComplete, Space } from 'antd';
 import { AudioOutlined, AudioMutedOutlined } from '@ant-design/icons';
 import { getRecommendations } from '../../util';
 
-const Dictaphone = ({ getSearchText, history, setHistory }) => {
+const Dictaphone = ({ historyText, getSearchText, history, setHistory }) => {
   const [options, setOptions] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [charCounter, setCharCounter] = useState(1);
@@ -18,9 +18,13 @@ const Dictaphone = ({ getSearchText, history, setHistory }) => {
   } = useSpeechRecognition();
 
   useEffect(() => {
-    setSearchText(transcript);
+    if (historyText) {
+      setSearchText(historyText);
+    } else {
+      setSearchText(transcript);
+    }
     // setSearchText()
-  }, [listening]);
+  }, [listening, historyText]);
 
   const microphoneStyle = {
     fontSize: '20px',
