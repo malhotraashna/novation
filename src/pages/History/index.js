@@ -7,8 +7,8 @@ import './index.css';
 const History = ({ data }) => {
   let content;
   if (data && data.length) {
-    content = data.map(command => {
-      return <p>{command}</p>;
+    content = data.map((command, index) => {
+      return <p key={command + index}>{command}</p>;
     });
   } else {
     content = <p>No History</p>;

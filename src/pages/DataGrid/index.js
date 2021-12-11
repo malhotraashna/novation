@@ -27,11 +27,13 @@ class DataGrid extends React.Component {
     const columns = [];
     this.props.data && this.props.data.length && this.props.data[0] &&
       Object.keys(this.props.data[0]).forEach((key, index) => {
-        columns.push({
-          title: constants[key],
-          dataIndex: key,
-          key: index,
-        });
+        if (key !== 'oid') {
+          columns.push({
+            title: constants[key],
+            dataIndex: key,
+            key: index,
+          });
+        }
       });
 
     return (

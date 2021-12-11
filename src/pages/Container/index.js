@@ -9,6 +9,7 @@ import History from '../History';
 import PieChart from '../Pie';
 import DoughnutChart from '../Doughnut';
 import ScatterChart from '../Scatter';
+import BarChart from '../Bar';
 import { getSearchData } from '../../util';
 
 const Container = () => {
@@ -43,6 +44,7 @@ const Container = () => {
         <PieChart />
         <DoughnutChart />
         <ScatterChart />
+        <BarChart />
       </Row>
       <History data={history} />
     </>
