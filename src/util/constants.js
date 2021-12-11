@@ -9,6 +9,12 @@ const constants = {
   status: 'Status',
   type: 'Type',
   oid: 'OID',
+  created_by: 'Created By',
+  created_date: 'Created Date',
+  expiration_date: 'Expiration Date',
+  modified_date: 'Modified Date',
+  name: 'Name',
+  quote_num: 'Quote Number',
 };
 
 export default constants;

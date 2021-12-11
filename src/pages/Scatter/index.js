@@ -20,21 +20,8 @@ const options = {
   },
 };
 
-const data = {
-  datasets: [
-    {
-      label: 'A dataset',
-      data: Array.from({ length: 100 }, () => ({
-        x: faker.datatype.number({ min: -100, max: 100 }),
-        y: faker.datatype.number({ min: -100, max: 100 }),
-      })),
-      backgroundColor: 'rgba(255, 99, 132, 1)',
-    },
-  ],
-};
-
-const ScatterChart = () => {
-  return <Scatter options={options} data={data} />;
+const ScatterChart = ({ data }) => {
+  return <Scatter data={data} />;
 };
 
 export default ScatterChart;

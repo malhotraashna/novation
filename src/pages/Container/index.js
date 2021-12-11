@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
-import { Row, Col, Divider } from 'antd';
+import { Row, Col, Divider, Empty } from 'antd';
 import 'antd/dist/antd.css';
 import './index.css';
 import Dictaphone from '../Dictaphone';
@@ -42,15 +42,23 @@ const Container = () => {
       </Row>
       <Divider style={{ margin: 0 }} />
       <Row justify='center'>
-        <Col span={24}>
-          <div>
-            {!_.isEmpty(searchData) && searchData.data.length ? <DataGrid data={searchData.data} /> : <div style={{ textAlign: 'center' }}>No data</div>}
-          </div>
-        </Col>
-        <PieChart />
-        <DoughnutChart />
-        <ScatterChart />
-        <BarChart />
+        {
+          searchData.type === 'grid' ?
+            <Col span={24}>
+              <div>
+                {!_.isEmpty(searchData) && searchData.data.length ? <DataGrid data={searchData.data} /> : <div style={{ textAlign: 'center' }}><Empty image={Empty.PRESENTED_IMAGE_SIMPLE} /></div>}
+              </div>
+            </Col> :
+            searchData.type === 'pie' ?
+              <PieChart data={searchData.data} /> :
+              searchData.type === 'doughnut' ?
+                <DoughnutChart data={searchData.data} /> :
+                searchData.type === 'scatter' ?
+                  <ScatterChart data={searchData.data} /> :
+                  searchData.type === 'bar' ?
+                    <BarChart data={searchData.data} /> :
+                    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+        }
       </Row>
       <History data={history} rerunHistory={rerunHistory} />
     </>
