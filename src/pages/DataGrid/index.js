@@ -13,11 +13,6 @@ class DataGrid extends React.Component {
     loading: false,
   };
 
-  componentDidMount() {
-    console.log('componentDidMount');
-    const { pagination } = this.state;
-  }
-
   compare(a, b) {
     if (a.sortOrder < b.sortOrder) {
       return -1;
@@ -29,7 +24,6 @@ class DataGrid extends React.Component {
   }
 
   render() {
-    console.log('props:: ', this.props);
     const columns = [];
     this.props.data && this.props.data.length && this.props.data[0] &&
       Object.keys(this.props.data[0]).forEach((key, index) => {
@@ -51,10 +45,7 @@ class DataGrid extends React.Component {
         dataSource={this.props.data}
         pagination={{ pageSize: 10, showSizeChanger: false }}
         scroll={{ y: 240 }}
-      // loading={loading}
-      // onChange={this.handleTableChange}
       />
-      // <Table columns={columns} dataSource={data} pagination={{ pageSize: 50, showSizeChanger: false }} scroll={{ y: 240 }} />
     );
   }
 }

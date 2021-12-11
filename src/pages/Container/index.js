@@ -24,7 +24,6 @@ const Container = () => {
 
   const getSearchTextResult = async (searchText) => {
     const res = await getSearchData(searchText);
-    console.log('data res:: ', res);
     setSearchData(res);
   };
 
@@ -43,21 +42,23 @@ const Container = () => {
       <Divider style={{ margin: 0 }} />
       <Row justify='center'>
         {
-          searchData.type === 'grid' ?
-            <Col span={24}>
-              <div>
-                {!_.isEmpty(searchData) && searchData.data.length ? <DataGrid data={searchData.data} /> : <div style={{ textAlign: 'center' }}><Empty image={Empty.PRESENTED_IMAGE_SIMPLE} /></div>}
-              </div>
-            </Col> :
-            searchData.type === 'pie' ?
-              <div className="d-chart"><PieChart data={searchData.data} /></div> :
-              searchData.type === 'donut' ?
-                <div className="d-chart"><DoughnutChart className="chart" data={searchData.data} /></div> :
-                searchData.type === 'scatter' ?
-                  <div className="chart"><ScatterChart className="chart" data={searchData.data} /></div> :
-                  searchData.type === 'bar' ?
-                    <div className="chart"><BarChart className="chart" data={searchData.data} /></div> :
-                    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+          searchData.error ?
+            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={searchData.error} style={{ color: '#a30001' }} /> :
+            searchData.type === 'grid' ?
+              <Col span={24}>
+                <div>
+                  {!_.isEmpty(searchData) && searchData.data.length ? <DataGrid data={searchData.data} /> : <div style={{ textAlign: 'center' }}><Empty image={Empty.PRESENTED_IMAGE_SIMPLE} /></div>}
+                </div>
+              </Col> :
+              searchData.type === 'pie' ?
+                <div className="d-chart"><PieChart data={searchData.data} /></div> :
+                searchData.type === 'donut' ?
+                  <div className="d-chart"><DoughnutChart className="chart" data={searchData.data} /></div> :
+                  searchData.type === 'scatter' ?
+                    <div className="chart"><ScatterChart className="chart" data={searchData.data} /></div> :
+                    searchData.type === 'bar' ?
+                      <div className="chart"><BarChart className="chart" data={searchData.data} /></div> :
+                      <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
         }
       </Row>
       <History data={history} rerunHistory={rerunHistory} />

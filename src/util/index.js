@@ -2,6 +2,17 @@ import axios from 'axios';
 import * as office from 'chartjs-plugin-colorschemes/src/colorschemes/colorschemes.office';
 import * as brewer from 'chartjs-plugin-colorschemes/src/colorschemes/colorschemes.brewer';
 
+
+const compare = (a, b) => {
+  if (a.x < b.x) {
+    return -1;
+  }
+  if (a.x > b.x) {
+    return 1;
+  }
+  return 0;
+};
+
 const getRecommendations = async (searchText) => {
   const res = await axios({
     method: 'post',
@@ -12,10 +23,8 @@ const getRecommendations = async (searchText) => {
       user: 'demo',
     }
   });
-  console.log('response:: ', res);
   const trimmedSearchText = searchText.trim();
   const newSearchText = trimmedSearchText.substring(0, trimmedSearchText.lastIndexOf(' '));
-  console.log('newSearchText:: ', newSearchText);
   const result = [];
   if (res && res.data) {
     const node = res.data.node && res.data.node.word;
@@ -27,7 +36,6 @@ const getRecommendations = async (searchText) => {
 };
 
 const getSearchData = async (searchText) => {
-  console.log('searchText:: ', searchText);
   try {
     const response = await axios({
       method: 'post',
@@ -38,7 +46,6 @@ const getSearchData = async (searchText) => {
         user: 'demo',
       },
     });
-    console.log('response:: ', response);
     const result = response.data;
     let data;
     if (result.type === 'pie' || result.type === 'donut') {
@@ -87,13 +94,14 @@ const getSearchData = async (searchText) => {
           {
             label: 'Price',
             data: result.data.map(record => ({
-              x: Date.parse(record.xaxis),
+              x: new Date(Date.parse(record.xaxis)),
               y: record.yaxis,
             })),
             backgroundColor: 'rgba(255, 99, 132, 1)',
           },
         ],
       };
+      chartData.datasets[0].data.sort(compare);
       data = {
         data: chartData,
         type: result.type,
@@ -103,8 +111,9 @@ const getSearchData = async (searchText) => {
     }
     return data;
   } catch (e) {
-    console.log(e.toString());
-    console.log(typeof e);
+    return {
+      error: e.response.data.message,
+    };
   }
 };
 

@@ -16,3 +16,13 @@ body{
   padding: 24px;
   padding-top: 0;
 }
+
+.ant-layout-header{
+  padding-left: 2% !important;
+}
+
+.logo{
+  height: 2vw;
+  width: 2vw;
+  margin-right: 1%;
+}

@@ -14,7 +14,6 @@ const Dictaphone = ({ historyText, getSearchText, history, setHistory }) => {
     listening,
     resetTranscript,
     browserSupportsSpeechRecognition,
-    finalTranscript,
   } = useSpeechRecognition();
 
   useEffect(() => {
@@ -24,7 +23,6 @@ const Dictaphone = ({ historyText, getSearchText, history, setHistory }) => {
       setSearchText(transcript);
       transcript && onFinish(transcript);
     }
-    // setSearchText()
   }, [listening, historyText]);
 
   const microphoneStyle = {
@@ -37,7 +35,6 @@ const Dictaphone = ({ historyText, getSearchText, history, setHistory }) => {
   }
 
   const onFinish = (values) => {
-    console.log('Success:', values);
     setCharCounter(1);
     let updatedHistory;
     if (searchText) {
@@ -77,17 +74,8 @@ const Dictaphone = ({ historyText, getSearchText, history, setHistory }) => {
   };
 
   const onChange = (data) => {
-    // resetTimeout();
     resetTranscript();
-    console.log('>>>>>>>', data, '?????', listening);
     setSearchText(data);
-  };
-
-  const startListening = async () => {
-    // resetTimeout();
-    await SpeechRecognition.startListening();
-    // updateSearchText();
-    // setSearchText(transcript);
   };
 
   return (
@@ -102,7 +90,6 @@ const Dictaphone = ({ historyText, getSearchText, history, setHistory }) => {
           name="search"
           required="true"
           style={{ width: '100%' }}
-        // rules={[{ required: true, message: 'Please input your search text!' }]}
         >
           <Space>
             <AutoComplete
