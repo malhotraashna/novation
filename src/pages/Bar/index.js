@@ -26,7 +26,7 @@ const options = {
       position: 'top',
     },
     title: {
-      display: true,
+      display: false,
       text: 'Chart.js Bar Chart',
     },
   },

@@ -19,3 +19,17 @@
   display: flex;
   justify-content: center;
 }
+
+.chart{
+  padding: 10%;
+  padding-top: 0;
+  width: 100%;;
+}
+
+.d-chart{
+  display: flex;
+  justify-content: center;
+  padding: 10%;
+  padding-top: 2%;
+  width: 80%;
+}

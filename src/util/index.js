@@ -41,7 +41,7 @@ const getSearchData = async (searchText) => {
     console.log('response:: ', response);
     const result = response.data;
     let data;
-    if (result.type === 'pie' || result.type === 'doughnut') {
+    if (result.type === 'pie' || result.type === 'donut') {
       const chartData = {
         labels: [],
         datasets: [
@@ -55,7 +55,7 @@ const getSearchData = async (searchText) => {
       };
       result.data.forEach(record => {
         chartData.labels.push(record.name);
-        chartData.datasets[0].data.push(record['count(*)']);
+        chartData.datasets[0].data.push(record.value);
       });
       data = {
         data: chartData,
@@ -66,7 +66,7 @@ const getSearchData = async (searchText) => {
         labels: [],
         datasets: [
           {
-            label: 'Dataset 1',
+            label: 'Quote Value',
             data: [],
             backgroundColor: brewer.RdPu3[0],
           }
@@ -84,7 +84,7 @@ const getSearchData = async (searchText) => {
       const chartData = {
         datasets: [
           {
-            label: 'Dataset',
+            label: 'Price',
             data: result.data.map(record => ({
               x: Date.parse(record.xaxis),
               y: record.yaxis,

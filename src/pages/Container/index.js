@@ -50,13 +50,13 @@ const Container = () => {
               </div>
             </Col> :
             searchData.type === 'pie' ?
-              <PieChart data={searchData.data} /> :
-              searchData.type === 'doughnut' ?
-                <DoughnutChart data={searchData.data} /> :
+              <div className="d-chart"><PieChart data={searchData.data} /></div> :
+              searchData.type === 'donut' ?
+                <div className="d-chart"><DoughnutChart className="chart" data={searchData.data} /></div> :
                 searchData.type === 'scatter' ?
-                  <ScatterChart data={searchData.data} /> :
+                  <div className="chart"><ScatterChart className="chart" data={searchData.data} /></div> :
                   searchData.type === 'bar' ?
-                    <BarChart data={searchData.data} /> :
+                    <div className="chart"><BarChart className="chart" data={searchData.data} /></div> :
                     <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
         }
       </Row>

@@ -22,8 +22,13 @@
 }
 
 .history-icon{
-  font-size: 5vw;
+  font-size: 4vw;
   color: #33bbf0;
   box-shadow: 0 0 0 5px #d8d6d6;
   border-radius: 50%;
+}
+
+.ant-popover-title,
+.ant-popover-inner-content {
+  background-color:#e6f0f6 !important;
 }

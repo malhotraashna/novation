@@ -18,7 +18,7 @@ const DoughnutChart = ({ data }) => {
             },
             legend: {
               display: true,
-              position: 'right'
+              position: 'bottom'
             }
           }
         }}
