@@ -76,6 +76,7 @@ const getSearchData = async (searchText) => {
         chartData.labels.push(record.xaxis);
         chartData.datasets[0].data.push(record.yaxis);
       });
+      chartData.labels.sort();
       data = {
         data: chartData,
         type: result.type,
