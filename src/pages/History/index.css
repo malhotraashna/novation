@@ -14,8 +14,16 @@
 
 .history-link{
   color:black;
+  text-align: left;
 }
 
 .history-link :hover{
   color: #1890ff;
+}
+
+.history-icon{
+  font-size: 5vw;
+  color: #33bbf0;
+  box-shadow: 0 0 0 5px #d8d6d6;
+  border-radius: 50%;
 }

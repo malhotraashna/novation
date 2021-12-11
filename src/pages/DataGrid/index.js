@@ -18,23 +18,31 @@ class DataGrid extends React.Component {
     const { pagination } = this.state;
   }
 
-  handleTableChange = (pagination, filters, sorter) => {
-
-  };
+  compare(a, b) {
+    if (a.sortOrder < b.sortOrder) {
+      return -1;
+    }
+    if (a.sortOrder > b.sortOrder) {
+      return 1;
+    }
+    return 0;
+  }
 
   render() {
     console.log('props:: ', this.props);
     const columns = [];
     this.props.data && this.props.data.length && this.props.data[0] &&
       Object.keys(this.props.data[0]).forEach((key, index) => {
-        if (key !== 'oid') {
+        if (constants[key]) {
           columns.push({
-            title: constants[key],
+            title: constants[key].value,
             dataIndex: key,
             key: index,
+            sortOrder: constants[key].sortOrder,
           });
         }
       });
+    columns.sort(this.compare);
 
     return (
       <Table

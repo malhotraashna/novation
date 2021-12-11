@@ -22,6 +22,7 @@ const Dictaphone = ({ historyText, getSearchText, history, setHistory }) => {
       setSearchText(historyText);
     } else {
       setSearchText(transcript);
+      transcript && onFinish(transcript);
     }
     // setSearchText()
   }, [listening, historyText]);
@@ -38,8 +39,14 @@ const Dictaphone = ({ historyText, getSearchText, history, setHistory }) => {
   const onFinish = (values) => {
     console.log('Success:', values);
     setCharCounter(1);
-    getSearchText(searchText);
-    const updatedHistory = [...history, searchText];
+    let updatedHistory;
+    if (searchText) {
+      getSearchText(searchText);
+      updatedHistory = [...history, searchText];
+    } else {
+      getSearchText(values);
+      updatedHistory = [...history, values];
+    }
     const updatedHistoryString = JSON.stringify({ commands: updatedHistory });
     sessionStorage.setItem('commandHistory', updatedHistoryString);
     setHistory(updatedHistory);
@@ -51,7 +58,6 @@ const Dictaphone = ({ historyText, getSearchText, history, setHistory }) => {
 
   const onSearch = async (searchText) => {
     if (!searchText || searchText.length <= 3) {
-      console.log('>>>>');
       setOptions([]);
     }
     if (charCounter % 3 === 0 && searchText.length) {
@@ -108,7 +114,7 @@ const Dictaphone = ({ historyText, getSearchText, history, setHistory }) => {
               value={searchText}
               style={{ width: 500, border: '1px solid #33bbf0', borderRadius: '3px' }}
             />
-            {listening ? <AudioOutlined style={microphoneStyle} onClick={SpeechRecognition.stopListening} /> : <AudioMutedOutlined style={microphoneStyle} onClick={startListening} />}
+            {listening ? <AudioOutlined style={microphoneStyle} onClick={SpeechRecognition.stopListening} /> : <AudioMutedOutlined style={microphoneStyle} onClick={SpeechRecognition.startListening} />}
           </Space>
         </Form.Item>
       </Form>

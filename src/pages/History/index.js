@@ -34,7 +34,7 @@ const History = ({ data, rerunHistory }) => {
         visible={visible}
         onVisibleChange={handleVisibleChange}
       >
-        <QuestionCircleFilled style={{ fontSize: '5vw', color: '#33bbf0' }} />
+        <QuestionCircleFilled className="history-icon" />
       </Popover>
     </div>
   );
