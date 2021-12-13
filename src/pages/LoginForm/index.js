@@ -8,7 +8,7 @@ async function loginUser(credentials) {
     // hard coded list of users 
     const users = [
         { username: 'admin', password: 'admin', role: 'admin' },
-        { username: 'user', password: 'user', role: 'user' }
+        { username: 'kevin', password: 'kevin', role: 'user' }
     ];
 
     const found = users.find(user => {
