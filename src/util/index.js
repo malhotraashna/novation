@@ -94,7 +94,7 @@ const getSearchData = async (searchText, username) => {
           {
             label: 'Price',
             data: result.data.map(record => ({
-              x: new Date(Date.parse(record.xaxis)),
+              x: record.xaxis,
               y: record.yaxis,
             })),
             backgroundColor: 'rgba(255, 99, 132, 1)',
