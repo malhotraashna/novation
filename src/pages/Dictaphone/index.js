@@ -35,6 +35,7 @@ const Dictaphone = ({ historyText, getSearchText, history, setHistory, token }) 
   }
 
   const onFinish = (values) => {
+    setOptions([]);
     setCharCounter(1);
     let updatedHistory;
     if (searchText) {
@@ -85,6 +86,7 @@ const Dictaphone = ({ historyText, getSearchText, history, setHistory, token }) 
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="on"
+        layout="inline"
       >
         <Form.Item
           name="search"

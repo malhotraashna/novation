@@ -15,7 +15,7 @@ function App() {
     <div className="app">
       <Layout>
         <Header>
-          {(token) ? (<div style={{ float: 'right' }}>You are logged in as {token.username}. <Button type='text' style={{ color: 'white' }} onClick={e => setToken(null)}>logout</Button></div>) : ''}
+          {(token) ? (<div style={{ float: 'right' }}>You are logged in as {token.username}. <Button type='text' style={{ color: 'white' }} onClick={e => setToken(null)}>Logout</Button></div>) : ''}
           <div style={{ fontWeight: 'bold', fontSize: 'large' }}>
             <img className="logo" src={logo} alt="Model N Co-pilot" />
             Model N Co-Pilot
