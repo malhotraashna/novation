@@ -35,7 +35,7 @@ function App() {
             }
           </Layout>
         </Content>
-        <Footer style={{ textAlign: 'center', bottom: '0', position: 'relative', width: '100%' }}>Model N Co-Pilot &copy; 2021</Footer>
+        <Footer style={{ textAlign: 'center', bottom: '0', position: 'fixed', width: '100%' }}>Model N Co-Pilot &copy; 2021</Footer>
       </Layout>
     </div>
   );
