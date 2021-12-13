@@ -5,7 +5,7 @@ import Dashboard from './pages/Dashboard';
 import Container from './pages/Container';
 import useAuthToken from './useAuthToken';
 import LoginForm from './pages/LoginForm';
-import logo from './resources/logo.png';
+import logo from './resources/logogif.gif';
 
 const { Header, Footer, Content } = Layout;
 

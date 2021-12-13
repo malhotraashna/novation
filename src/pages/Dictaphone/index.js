@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import _ from 'lodash';
 import SpeechRecognition, { useSpeechRecognition, } from 'react-speech-recognition';
 import { Form, AutoComplete, Space } from 'antd';
 import { AudioOutlined, AudioMutedOutlined } from '@ant-design/icons';
@@ -37,13 +38,17 @@ const Dictaphone = ({ historyText, getSearchText, history, setHistory, token }) 
   const onFinish = (values) => {
     setOptions([]);
     setCharCounter(1);
-    let updatedHistory;
+    let updatedHistory = history;
     if (searchText) {
       getSearchText(searchText);
-      updatedHistory = [...history, searchText];
+      if (!_.isEmpty(searchText)) {
+        updatedHistory.push(searchText);
+      }
     } else {
-      getSearchText(values);
-      updatedHistory = [...history, values];
+      getSearchText(values.search);
+      if (values && values.search && !_.isEmpty(values.search)) {
+        updatedHistory.push(values.search);
+      }
     }
     const updatedHistoryString = JSON.stringify({ commands: updatedHistory });
     sessionStorage.setItem('commandHistory', updatedHistoryString);
