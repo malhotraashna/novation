@@ -4,6 +4,7 @@
   bottom: 0%;
   top: 85%;
   max-width: min-content;
+  z-index: 1;
 }
 
 .ant-popover{
