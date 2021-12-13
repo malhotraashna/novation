@@ -111,9 +111,15 @@ const getSearchData = async (searchText, username) => {
     }
     return data;
   } catch (e) {
-    return {
-      error: e.response.data.message,
-    };
+    if (e.message === 'Network Error') {
+      return {
+        error: e.message,
+      };
+    } else {
+      return {
+        error: e.response.data.message,
+      };
+    }
   }
 };
 

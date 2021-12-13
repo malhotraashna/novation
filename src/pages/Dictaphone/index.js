@@ -5,7 +5,7 @@ import { Form, AutoComplete, Space } from 'antd';
 import { AudioOutlined, AudioMutedOutlined } from '@ant-design/icons';
 import { getRecommendations } from '../../util';
 
-const Dictaphone = ({ historyText, getSearchText, history, setHistory, token }) => {
+const Dictaphone = ({ historyText, getSearchText, history, setHistory, token, setHistoryText }) => {
   const [options, setOptions] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [charCounter, setCharCounter] = useState(1);
@@ -22,7 +22,7 @@ const Dictaphone = ({ historyText, getSearchText, history, setHistory, token }) 
       setSearchText(historyText);
     } else {
       setSearchText(transcript);
-      transcript && onFinish(transcript);
+      transcript && onFinish({ search: transcript });
     }
   }, [listening, historyText]);
 
@@ -36,6 +36,7 @@ const Dictaphone = ({ historyText, getSearchText, history, setHistory, token }) 
   }
 
   const onFinish = (values) => {
+    setHistoryText('');
     setOptions([]);
     setCharCounter(1);
     let updatedHistory = history;
@@ -59,14 +60,14 @@ const Dictaphone = ({ historyText, getSearchText, history, setHistory, token }) 
     console.log('Failed:', errorInfo);
   };
 
-  const onSearch = async (searchText) => {
-    if (!searchText || searchText.length <= 3) {
+  const onSearch = async (searchingText) => {
+    if (!searchingText || searchingText.length <= 3) {
       setOptions([]);
     }
-    if (charCounter % 3 === 0 && searchText.length) {
-      const recommendations = await getRecommendations(searchText, token.username);
+    if (charCounter % 3 === 0 && searchingText.length) {
+      const recommendations = await getRecommendations(searchingText, token.username);
       setOptions(
-        !searchText ? [] : recommendations
+        !searchingText ? [] : recommendations
       );
       setCharCounter(1);
     } else {
@@ -82,6 +83,11 @@ const Dictaphone = ({ historyText, getSearchText, history, setHistory, token }) 
   const onChange = (data) => {
     resetTranscript();
     setSearchText(data);
+  };
+
+  const startListening = () => {
+    setHistoryText('');
+    SpeechRecognition.startListening();
   };
 
   return (
@@ -108,7 +114,7 @@ const Dictaphone = ({ historyText, getSearchText, history, setHistory, token }) 
               value={searchText}
               style={{ width: 500, border: '1px solid #33bbf0', borderRadius: '3px' }}
             />
-            {listening ? <AudioOutlined style={microphoneStyle} onClick={SpeechRecognition.stopListening} /> : <AudioMutedOutlined style={microphoneStyle} onClick={SpeechRecognition.startListening} />}
+            {listening ? <AudioOutlined style={microphoneStyle} onClick={SpeechRecognition.stopListening} /> : <AudioMutedOutlined style={microphoneStyle} onClick={startListening} />}
           </Space>
         </Form.Item>
       </Form>

@@ -39,7 +39,7 @@ const Container = ({ token }) => {
     <>
       <Row className="row">
         <Col className="col">
-          <Dictaphone historyText={historyText} getSearchText={getSearchTextResult} history={history} setHistory={setHistory} token={token} />
+          <Dictaphone historyText={historyText} getSearchText={getSearchTextResult} history={history} setHistory={setHistory} token={token} setHistoryText={setHistoryText} />
         </Col>
       </Row>
       <Divider style={{ marginTop: '2%', marginBottom: '2%' }} />

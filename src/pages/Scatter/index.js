@@ -17,11 +17,14 @@ const options = {
     y: {
       beginAtZero: true,
     },
+    x: {
+      beginAtZero: true,
+    },
   },
 };
 
 const ScatterChart = ({ data }) => {
-  return <Scatter data={data} />;
+  return <Scatter data={data} options={options} />;
 };
 
 export default ScatterChart;
