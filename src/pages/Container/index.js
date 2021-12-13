@@ -12,7 +12,7 @@ import ScatterChart from '../Scatter';
 import BarChart from '../Bar';
 import { getSearchData } from '../../util';
 
-const Container = () => {
+const Container = ({ token }) => {
   const [historyText, setHistoryText] = useState();
   const [searchData, setSearchData] = useState({});
   const [history, setHistory] = useState([]);
@@ -23,7 +23,7 @@ const Container = () => {
   }, []);
 
   const getSearchTextResult = async (searchText) => {
-    const res = await getSearchData(searchText);
+    const res = await getSearchData(searchText, token.username);
     setSearchData(res);
   };
 
@@ -36,7 +36,7 @@ const Container = () => {
     <>
       <Row className="row">
         <Col className="col">
-          <Dictaphone historyText={historyText} getSearchText={getSearchTextResult} history={history} setHistory={setHistory} />
+          <Dictaphone historyText={historyText} getSearchText={getSearchTextResult} history={history} setHistory={setHistory} token={token} />
         </Col>
       </Row>
       <Divider style={{ margin: 0 }} />

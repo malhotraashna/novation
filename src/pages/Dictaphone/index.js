@@ -4,7 +4,7 @@ import { Form, AutoComplete, Space } from 'antd';
 import { AudioOutlined, AudioMutedOutlined } from '@ant-design/icons';
 import { getRecommendations } from '../../util';
 
-const Dictaphone = ({ historyText, getSearchText, history, setHistory }) => {
+const Dictaphone = ({ historyText, getSearchText, history, setHistory, token }) => {
   const [options, setOptions] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [charCounter, setCharCounter] = useState(1);
@@ -58,7 +58,7 @@ const Dictaphone = ({ historyText, getSearchText, history, setHistory }) => {
       setOptions([]);
     }
     if (charCounter % 3 === 0 && searchText.length) {
-      const recommendations = await getRecommendations(searchText);
+      const recommendations = await getRecommendations(searchText, token.username);
       setOptions(
         !searchText ? [] : recommendations
       );

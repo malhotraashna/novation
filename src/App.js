@@ -11,7 +11,6 @@ const { Header, Footer, Content } = Layout;
 
 function App() {
   const { token, setToken } = useAuthToken();
-  console.log('yayayayyayyayayaya');
   return (
     <div className="app">
       <Layout>
@@ -28,7 +27,7 @@ function App() {
               (!token) ? (<div style={{ paddingTop: 60 }}><LoginForm setToken={setToken} /></div>) : (<div style={{ backgroundColor: '#fff', padding: 30 }}>
                 <BrowserRouter>
                   <Routes>
-                    <Route path="/" element={<Container />} />
+                    <Route path="/" element={<Container token={token} />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                   </Routes>
                 </BrowserRouter>

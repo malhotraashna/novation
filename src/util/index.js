@@ -13,14 +13,14 @@ const compare = (a, b) => {
   return 0;
 };
 
-const getRecommendations = async (searchText) => {
+const getRecommendations = async (searchText, username) => {
   const res = await axios({
     method: 'post',
     url: 'http://mnipdmveeravalli:3000/recommendations',
     headers: {},
     data: {
       query: searchText,
-      user: 'demo',
+      user: username,
     }
   });
   const trimmedSearchText = searchText.trim();
@@ -35,7 +35,7 @@ const getRecommendations = async (searchText) => {
   return result;
 };
 
-const getSearchData = async (searchText) => {
+const getSearchData = async (searchText, username) => {
   try {
     const response = await axios({
       method: 'post',
@@ -43,7 +43,7 @@ const getSearchData = async (searchText) => {
       headers: {},
       data: {
         query: searchText,
-        user: 'demo',
+        user: username,
       },
     });
     const result = response.data;
